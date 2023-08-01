@@ -1,0 +1,25 @@
+{
+  "name": "@aptt/aptt-ch-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "nodemon scripts/develop.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "eslint": "^8.46.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.0",
+    "prettier-plugin-jsdoc": "^1.0.1"
+  },
+  "dependencies": {
+    "graphql": "^16.7.1",
+    "graphql-yoga": "^4.0.3",
+    "jsonwebtoken": "^9.0.1"
+  }
+}
