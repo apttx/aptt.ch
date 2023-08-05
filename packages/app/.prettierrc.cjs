@@ -2,11 +2,12 @@
 module.exports = {
   useTabs: false,
   tabWidth: 2,
-  arrowParens: "always",
+  arrowParens: 'always',
   singleQuote: true,
-  trailingComma: "all",
+  trailingComma: 'all',
   printWidth: 100,
   semi: false,
-  plugins: ["prettier-plugin-jsdoc"],
+  plugins: ['prettier-plugin-svelte', 'prettier-plugin-css-order', 'prettier-plugin-jsdoc'],
+  overrides: [{ files: '*.svelte', options: { parser: 'svelte' } }],
   singleAttributePerLine: true,
-};
+}
