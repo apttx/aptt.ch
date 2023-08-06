@@ -45,6 +45,9 @@ importers:
 
   packages/app:
     devDependencies:
+      '@fontsource/manrope':
+        specifier: ^5.0.8
+        version: 5.0.8
       '@playwright/test':
         specifier: ^1.28.1
         version: 1.28.1
@@ -54,6 +57,9 @@ importers:
       '@sveltejs/kit':
         specifier: ^1.20.4
         version: 1.20.4(svelte@4.0.5)(vite@4.4.2)
+      '@unocss/reset':
+        specifier: ^0.54.1
+        version: 0.54.1
       '@urql/core':
         specifier: ^4.1.1
         version: 4.1.1
@@ -378,6 +384,10 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
+  /@fontsource/manrope@5.0.8:
+    resolution: {integrity: sha512-trqxGSH4YSekXDmto97FaWED4mf9xFL/iWfZe1ksHuE0pJB0C7OUKb2w2ckoAE4S1ys5fRNCNLNA1sATAjyVCQ==}
+    dev: true
+
   /@graphql-tools/executor@1.1.0(graphql@16.7.1):
     resolution: {integrity: sha512-+1wmnaUHETSYxiK/ELsT60x584Rw3QKBB7F/7fJ83HKPnLifmE2Dm/K9Eyt6L0Ppekf1jNUbWBpmBGb8P5hAeg==}
     engines: {node: '>=16.0.0'}
@@ -679,6 +689,10 @@ packages:
 
   /@types/unist@2.0.7:
     resolution: {integrity: sha512-cputDpIbFgLUaGQn6Vqg3/YsJwxUwHLO13v3i5ouxT4lat0khip9AEWxtERujXV9wxIB1EyF97BSJFt6vpdI8g==}
+    dev: true
+
+  /@unocss/reset@0.54.1:
+    resolution: {integrity: sha512-qZcmybayQTX4QP7ya7jteN9IySU/ViK8HcCpixHA1ttUrsQeSURgdy01E74p+TsWDH0SY7vYmOy+HbYfQNycqQ==}
     dev: true
 
   /@urql/core@4.1.1:
