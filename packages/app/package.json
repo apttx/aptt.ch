@@ -15,9 +15,11 @@
     "test:unit": "vitest"
   },
   "devDependencies": {
+    "@fontsource/manrope": "^5.0.8",
     "@playwright/test": "^1.28.1",
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.20.4",
+    "@unocss/reset": "^0.54.1",
     "@urql/core": "^4.1.1",
     "d3": "^7.8.5",
     "eslint": "^8.28.0",
