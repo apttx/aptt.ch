@@ -16,11 +16,16 @@ export const typeDefs = /* GraphQL */ `
     target: Technology!
   }
 
+  type Image {
+    url: String!
+  }
+
   union Project_Technology = Technology | Technology_Group | Technology_Connection
 
   type Project {
     id: String!
     title: String!
+    thumbnail: Image!
     description: String!
     technologies: [Project_Technology!]!
   }

@@ -34,6 +34,12 @@
 
   <p>{project.description}</p>
 
+  <img
+    src={project.thumbnail.url}
+    alt="{project.title} screenshot"
+    class="project_thumbnail"
+  />
+
   {@const nodes = project.technologies
     .filter((technology) => !('connector' in technology))
     .map((technology) =>
@@ -71,5 +77,13 @@
   .technology_icon {
     width: auto;
     height: 4rem;
+  }
+
+  .project_thumbnail {
+    display: block;
+    margin-inline: 2rem;
+    box-shadow: 0 0.5rem 2rem #00000044;
+    border-radius: 0.5rem;
+    width: calc(100% - 4rem);
   }
 </style>
