@@ -35,10 +35,15 @@
 
   <p>{project.description}</p>
 
-  <Browser_Window
-    title={project.title}
-    screenshot_url={project.thumbnail.url}
-  />
+  <div
+    role="presentation"
+    class="project_browser_window"
+  >
+    <Browser_Window
+      title={project.title}
+      screenshot_url={project.thumbnail.url}
+    />
+  </div>
 
   {@const nodes = project.technologies
     .filter((technology) => !('connector' in technology))
@@ -57,16 +62,23 @@
   {@const simulation = get_force_simulation({ edges, nodes })}
   {@const _ = simulation.tick(100)}
 
-  <Graph
-    {edges}
-    {nodes}
-  />
+  <div
+    role="presentation"
+    class="project_graph"
+  >
+    <Graph
+      {edges}
+      {nodes}
+    />
+  </div>
 {/each}
 
 <style>
   .technology_list {
     display: grid;
     grid-auto-flow: column;
+    margin-inline: var(--margin_content_layout);
+    margin-block: 4rem;
   }
 
   .technology_list_item {
@@ -77,5 +89,42 @@
   .technology_icon {
     width: auto;
     height: 4rem;
+  }
+
+  .project_browser_window {
+    margin-inline: var(--margin_content_layout);
+    margin-block: 2rem;
+  }
+
+  .project_graph {
+    margin-inline: var(--margin_content_page);
+  }
+
+  p {
+    margin-inline: var(--margin_content_text);
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin-inline: var(--margin_content_text);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 800;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1.125rem;
   }
 </style>
