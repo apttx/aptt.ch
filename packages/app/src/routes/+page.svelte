@@ -1,4 +1,5 @@
 <script>
+  import Browser_Window from '$components/browser_window.svelte'
   import Graph from '$components/graph.svelte'
   import { get_force_simulation } from '$utilities/simulation.mjs'
 
@@ -34,10 +35,9 @@
 
   <p>{project.description}</p>
 
-  <img
-    src={project.thumbnail.url}
-    alt="{project.title} screenshot"
-    class="project_thumbnail"
+  <Browser_Window
+    title={project.title}
+    screenshot_url={project.thumbnail.url}
   />
 
   {@const nodes = project.technologies
@@ -77,13 +77,5 @@
   .technology_icon {
     width: auto;
     height: 4rem;
-  }
-
-  .project_thumbnail {
-    display: block;
-    margin-inline: 2rem;
-    box-shadow: 0 0.5rem 2rem #00000044;
-    border-radius: 0.5rem;
-    width: calc(100% - 4rem);
   }
 </style>

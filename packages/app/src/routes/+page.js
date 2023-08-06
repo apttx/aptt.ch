@@ -28,7 +28,7 @@ const technology_fragment = gql`
 
 const projects_query = gql`
   {
-    projects {
+    projects(user: { roles: ["employer"] }) {
       title
       description
       thumbnail {
