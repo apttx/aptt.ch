@@ -32,13 +32,17 @@ export const get_simulation_edge = (basic_edge) => ({
  * @type {<Node extends { id: string } = never>(options: {
  *   nodes: Node[]
  *   edges: { source: Node['id']; target: Node['id'] }[]
+ *   distance?: number | ((simulation_edge: Simulation_Edge) => number)
  * }) => import('d3').Simulation<Simulation_Node, Simulation_Edge>}
  */
 export const get_force_simulation = (options) => {
   const { nodes, edges } = options
 
+  const distance = options.distance ?? 200
+
   const link_force = retypedForceLink(edges)
-    .distance(() => 200)
+    // @ts-ignore this type is wrong. the same links are passed to function values, meaning that they initially have string sources & targets, then the given nodes (objects) after they were resolved.
+    .distance(distance)
     .id((node) => node.id)
   const charge_force = forceManyBody().strength(-1000)
   const simulation = retypedForceSimulation(nodes)
