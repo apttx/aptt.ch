@@ -1,15 +1,18 @@
 <script>
   import { get_circle, get_line } from '$utilities/graph_svg.mjs'
 
-  /** @type {Simulation_Edge[]} */
-  export let edges = []
   /** @type {Simulation_Node[]} */
   export let nodes = []
-
-  const width = 500
-  const height = 500
-  const node_icon_size = 50
-  const edge_icon_size = 30
+  /** @type {Simulation_Edge[]} */
+  export let edges = []
+  /** @type {number} */
+  export let node_icon_size = 40
+  /** @type {number} */
+  export let edge_icon_size = 30
+  /** @type {number} */
+  export let width = 500
+  /** @type {number} */
+  export let height = 500
 
   $: lines = edges.map((link) => get_line(link))
   $: circles = nodes.map((node) => get_circle(node))
