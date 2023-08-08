@@ -2,8 +2,9 @@ export const typeDefs = /* GraphQL */ `
   type Technology {
     id: String!
     name: String!
-    version: String
     icon: String
+    enjoyment: Float!
+    familiarity: Float!
   }
 
   type Technology_Group {
