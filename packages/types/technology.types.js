@@ -3,6 +3,8 @@
  *  name: string
  *  version?: string
  *  icon?: string
+ *  familiarity: number
+ *  enjoyment: number
  * }} Technology
  */
 
