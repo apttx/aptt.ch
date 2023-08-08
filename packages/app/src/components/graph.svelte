@@ -65,7 +65,7 @@
 <style>
   svg {
     display: block;
-    width: 50rem;
+    width: 100%;
     height: auto;
   }
 
