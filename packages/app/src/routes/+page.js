@@ -23,6 +23,8 @@ const technology_fragment = gql`
   fragment technology_fragment on Technology {
     name
     icon
+    enjoyment
+    familiarity
   }
 `
 
