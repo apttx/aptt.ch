@@ -44,12 +44,14 @@ export const get_force_simulation = (options) => {
     // @ts-ignore this type is wrong. the same links are passed to function values, meaning that they initially have string sources & targets, then the given nodes (objects) after they were resolved.
     .distance(distance)
     .id((node) => node.id)
-  const charge_force = forceManyBody().strength(-1000)
+  const charge_force = forceManyBody().strength(-100)
   const simulation = retypedForceSimulation(nodes)
     .force('link', link_force)
     .force('charge', charge_force)
     .force('x', forceX())
     .force('y', forceY())
+
+  simulation.alpha(0.05)
 
   return simulation
 }
