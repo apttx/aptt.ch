@@ -58,12 +58,40 @@
 
     simulation = get_technology_graph_force_simulation()
   }
+
+  /** @type {Simulation_Node | null} */
+  let dragged_node = null
 </script>
 
 <Graph
   {edges}
   {nodes}
   node_icon_size={40}
+  on:node_dragstart={(event) => {
+    const { x, y } = event.detail
+
+    const node = simulation.find(x, y, 40)
+
+    if (node && node.id !== 'aptt') {
+      dragged_node = node
+    }
+  }}
+  on:node_drag={(event) => {
+    if (dragged_node) {
+      const { x, y } = event.detail
+
+      dragged_node.fx = x
+      dragged_node.fy = y
+    }
+  }}
+  on:node_dragend={() => {
+    if (dragged_node) {
+      dragged_node.fx = null
+      dragged_node.fy = null
+    }
+
+    dragged_node = null
+  }}
 />
 
 <form on:submit|preventDefault>
