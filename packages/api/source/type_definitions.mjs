@@ -26,8 +26,9 @@ export const typeDefs = /* GraphQL */ `
   type Project {
     id: String!
     title: String!
-    thumbnail: Image!
     description: String!
+    thumbnail: Image!
+    url: String
     technologies: [Project_Technology!]!
   }
 
