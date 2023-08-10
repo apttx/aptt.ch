@@ -3,7 +3,7 @@
  *   title: string
  *   description: string
  *   date: Date
- * }} Event
+ * }} Activity_Event
  */
 
 /**
@@ -13,6 +13,6 @@
  *   date?: Date | Date_Range
  *   place?: Place
  *   projects: Project[]
- *   events: Event[]
+ *   events: Activity_Event[]
  * }} Activity
  */
