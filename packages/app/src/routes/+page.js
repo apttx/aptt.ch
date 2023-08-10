@@ -36,6 +36,7 @@ const projects_query = gql`
       thumbnail {
         url
       }
+      url
       technologies {
         __typename
         ...technology_fragment

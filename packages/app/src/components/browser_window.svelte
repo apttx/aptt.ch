@@ -1,12 +1,12 @@
 <script>
-  import Minimize from '~icons/ph/minus-bold'
   import Maximize from '~icons/ph/arrows-out-simple-bold'
-  import Close from '~icons/ph/x-bold'
 
   /** @type {string} */
   export let title
   /** @type {string} */
   export let screenshot_url
+  /** @type {string | undefined} */
+  export let url = undefined
 </script>
 
 <figure class="browser_window">
@@ -22,33 +22,26 @@
   </picture>
 
   <!-- visual browser window buttons, not relevant to a11y -->
-  <span
-    class="browser_button browser_minimize"
-    aria-hidden="true"
-  >
-    <Minimize />
-  </span>
-  <span
-    class="browser_button browser_maximize"
-    aria-hidden="true"
-  >
-    <Maximize />
-  </span>
-  <span
-    class="browser_button browser_close"
-    aria-hidden="true"
-  >
-    <Close />
-  </span>
+  {#if url}
+    <a
+      class="browser_button browser_maximize"
+      href={url}
+      target="_blank"
+      rel="noreferrer,nofollow"
+      title="Visit this project"
+    >
+      <Maximize aria-label="Visit {title}" />
+    </a>
+  {/if}
 </figure>
 
 <style>
   .browser_window {
     display: grid;
-    grid-template-columns: 1fr repeat(3, auto);
+    grid-template-columns: 1fr auto;
     grid-template-areas:
-      'tab minimize maximize close'
-      'page page page page';
+      'tab maximize'
+      'page page';
     box-shadow: 0 0.5rem 2rem #00000044;
     border-radius: 0.5rem;
     background-color: #ddddee;
@@ -67,22 +60,10 @@
     color: white;
   }
 
-  .browser_button {
-    padding-inline: 0.5rem;
-    padding-block: 0.5rem;
-  }
-
-  .browser_minimize {
-    grid-area: minimize;
-  }
-
   .browser_maximize {
     grid-area: maximize;
-  }
-
-  .browser_close {
-    grid-area: close;
-    padding-right: 0.5rem;
+    padding-inline: 0.75rem;
+    padding-block: 0.5rem;
   }
 
   picture,

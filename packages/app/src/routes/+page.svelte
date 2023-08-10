@@ -33,6 +33,7 @@
     <Browser_Window
       title={project.title}
       screenshot_url={project.thumbnail.url}
+      url={project.url}
     />
   </div>
 
