@@ -1,0 +1,12 @@
+{
+  "name": "@aptt/aptt-ch-types",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "aptt",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "prettier": "^2.8.8",
+    "prettier-plugin-jsdoc": "^0.4.2"
+  }
+}

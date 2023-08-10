@@ -1,23 +1,23 @@
 /**
  * @typedef {{
- *  name: string
- *  version?: string
- *  icon?: string
- *  familiarity: number
- *  enjoyment: number
+ *   name: string
+ *   version?: string
+ *   icon?: string
+ *   familiarity: number
+ *   enjoyment: number
  * }} Technology
  */
 
 /**
  * @typedef {{
- *  technologies: Technology[]
+ *   technologies: Technology[]
  * }} Technology_Group
  */
 
 /**
  * @typedef {{
- *  connector?: Technology
- *  source: Technology
- *  target: Technology
+ *   connector?: Technology
+ *   source: Technology
+ *   target: Technology
  * }} Technology_Connection
  */
