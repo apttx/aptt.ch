@@ -10,9 +10,9 @@ import { schema } from './schema.mjs'
  * }) => import('node:http').RequestListener}
  */
 export const get_handler = (options) => {
-  const graphiql = options?.graphiql ?? false
-  const landingPage = options?.landingPage ?? false
-  const context = options?.context
+  const graphiql = options.graphiql ?? false
+  const landingPage = options.landingPage ?? false
+  const context = options.context
 
   const yoga = createYoga({
     schema,
