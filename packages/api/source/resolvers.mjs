@@ -36,10 +36,6 @@ const resolve_technology_type = (technology) => {
 export const projects = (_, args, context) => {
   const projects = context.projects
     .filter((project) => {
-      if (!project.restrictions) {
-        return true
-      }
-
       const meets_all_restrictions = project.restrictions.every((restriction) =>
         meets_restriction(restriction, args.user),
       )

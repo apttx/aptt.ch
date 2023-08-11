@@ -6,8 +6,8 @@
 
 /**
  * @typedef {Project & {
- *     restrictions?: Restriction[]
- *   }} Restricted_Project
+ *   restrictions: Restriction[]
+ * }} Restricted_Project
  */
 
 /**
