@@ -1,6 +1,6 @@
 /**
  * @typedef {{
  *   name: string
- *   icon: string
+ *   icon?: string
  * }} Place
  */
