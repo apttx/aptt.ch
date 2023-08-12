@@ -32,12 +32,13 @@ export const typeDefs = /* GraphQL */ `
     technologies: [Project_Technology!]!
   }
 
-  input User {
+  type User {
     roles: [String!]!
   }
 
   type Query {
-    projects(user: User): [Project!]!
+    projects: [Project!]!
     technologies: [Technology!]!
+    me: User!
   }
 `
