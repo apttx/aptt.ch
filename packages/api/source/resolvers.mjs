@@ -28,29 +28,13 @@ const resolve_technology_type = (technology) => {
 
 /** @type {import('graphql').GraphQLFieldResolver<unknown, Resolver_Context>} */
 export const projects = (_, __, context) => {
-  const projects = context.projects
-    .filter((project) => {
-      const meets_all_restrictions = project.restrictions.every((restriction) =>
-        meets_restriction(restriction, context.user),
-      )
+  const projects = context.projects.filter((project) => {
+    const meets_all_restrictions = project.restrictions.every((restriction) =>
+      meets_restriction(restriction, context.user),
+    )
 
-      return meets_all_restrictions
-    })
-    .map((project) => {
-      const resolved_technologies = project.technologies.map((technology) => {
-        const __typename = resolve_technology_type(technology)
-
-        return {
-          ...technology,
-          __typename,
-        }
-      })
-
-      return {
-        ...project,
-        technologies: resolved_technologies,
-      }
-    })
+    return meets_all_restrictions
+  })
 
   return projects
 }
@@ -72,5 +56,14 @@ export const resolvers = {
     projects,
     technologies,
     me,
+  },
+  Project_Technology: {
+    /**
+     * @type {import('graphql').GraphQLTypeResolver<
+     *   Technology | Technology_Group | Technology_Connection,
+     *   Resolver_Context
+     * >}
+     */
+    __resolveType: resolve_technology_type,
   },
 }
