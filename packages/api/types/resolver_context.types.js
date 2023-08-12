@@ -12,7 +12,14 @@
 
 /**
  * @typedef {{
+ *   roles: string[]
+ * }} User
+ */
+
+/**
+ * @typedef {{
  *   projects: Restricted_Project[]
  *   technologies: Technology[]
+ *   user: User
  * }} Resolver_Context
  */
