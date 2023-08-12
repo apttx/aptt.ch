@@ -29,7 +29,7 @@ const resolve_technology_type = (technology) => {
 /** @type {import('graphql').GraphQLFieldResolver<unknown, Resolver_Context>} */
 export const projects = (_, __, context) => {
   const projects = context.projects.filter((project) => {
-    const meets_all_restrictions = project.restrictions.every((restriction) =>
+    const meets_all_restrictions = project.restrictions.some((restriction) =>
       meets_restriction(restriction, context.user),
     )
 
@@ -49,7 +49,7 @@ export const technologies = (_, __, context) => {
 /** @type {import('graphql').GraphQLFieldResolver<unknown, Resolver_Context>} */
 export const activities = (_, __, context) => {
   const activities = context.activities.filter((project) => {
-    const meets_all_restrictions = project.restrictions.every((restriction) =>
+    const meets_all_restrictions = project.restrictions.some((restriction) =>
       meets_restriction(restriction, context.user),
     )
 
