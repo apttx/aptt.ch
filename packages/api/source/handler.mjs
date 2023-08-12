@@ -7,7 +7,7 @@ import { verify } from './jwt.mjs'
 export const get_user_from_request = (options, request) => {
   /** @type {User} */
   const public_user = {
-    roles: [],
+    roles: ['public'],
   }
 
   const authorization_header = request.headers.get('Authorization')

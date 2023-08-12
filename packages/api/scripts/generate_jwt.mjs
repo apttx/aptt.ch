@@ -28,7 +28,11 @@ const main = () => {
     'missing `PRIVATE_JWT_SECRET` in environment.\n  ~~> $ echo PRIVATE_JWT_SECRET=replace_this >> .env',
   )
 
-  const roles = get_roles(argv)
+  const roles = [
+    // all authenticated users can see public
+    'public',
+    ...get_roles(argv),
+  ]
 
   /** @type {User} */
   const user = {
