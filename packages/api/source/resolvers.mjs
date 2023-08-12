@@ -47,14 +47,37 @@ export const technologies = (_, __, context) => {
 }
 
 /** @type {import('graphql').GraphQLFieldResolver<unknown, Resolver_Context>} */
+export const activities = (_, __, context) => {
+  const activities = context.activities.filter((project) => {
+    const meets_all_restrictions = project.restrictions.every((restriction) =>
+      meets_restriction(restriction, context.user),
+    )
+
+    return meets_all_restrictions
+  })
+
+  return activities
+}
+
+/** @type {import('graphql').GraphQLFieldResolver<unknown, Resolver_Context>} */
 export const me = (_, __, context) => {
   return context.user
+}
+
+/** @type {(technology: Date | Date_Range) => 'Date' | 'Date_Range'} */
+const resolve_activity_date_type = (activity_date) => {
+  if (activity_date instanceof Date) {
+    return 'Date'
+  }
+
+  return 'Date_Range'
 }
 
 export const resolvers = {
   Query: {
     projects,
     technologies,
+    activities,
     me,
   },
   Project_Technology: {
@@ -65,5 +88,17 @@ export const resolvers = {
      * >}
      */
     __resolveType: resolve_technology_type,
+  },
+  Activity_Date: {
+    /** @type {import('graphql').GraphQLTypeResolver<Date | Date_Range, Resolver_Context>} */
+    __resolveType: resolve_activity_date_type,
+  },
+  Date: {
+    /** @type {import('graphql').GraphQLFieldResolver<Date, Resolver_Context>} */
+    iso_8601: (parent) => {
+      const iso_8601 = parent.toISOString()
+
+      return iso_8601
+    },
   },
 }

@@ -6,6 +6,7 @@ import { get_handler, get_user_from_request } from '../source/handler.mjs'
 
 import { technologies } from '../data/technolgies.mjs'
 import { projects } from '../data/projects.mjs'
+import { activities } from '../data/activities.mjs'
 
 const main = async () => {
   const environment = read_dotenv()
@@ -23,6 +24,7 @@ const main = async () => {
     const context = {
       technologies,
       projects,
+      activities,
       user,
     }
 

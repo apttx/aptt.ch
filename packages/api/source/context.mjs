@@ -31,6 +31,12 @@ export const context_from_env = () => {
     technologies = parse(env.PRIVATE_TECHNOLOGIES)
   }
 
+  /** @type {Restricted_Activity[]} */
+  let activities = []
+  if (env.PRIVATE_ACTIVITIES) {
+    activities = parse(env.PRIVATE_ACTIVITIES)
+  }
+
   /** @type {(initial_context: import('graphql-yoga').YogaInitialContext) => Resolver_Context} */
   const context_function = (initial_context) => {
     const user = get_user_from_request({ jwt_secret }, initial_context.request)
@@ -38,6 +44,7 @@ export const context_from_env = () => {
     const context = {
       projects,
       technologies,
+      activities,
       user,
     }
 
