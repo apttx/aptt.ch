@@ -1,6 +1,6 @@
 /**
  * @typedef {{
  *   start: Date
- *   end: Date
+ *   end?: Date
  * }} Date_Range
  */

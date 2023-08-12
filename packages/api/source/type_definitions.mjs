@@ -43,7 +43,7 @@ export const typeDefs = /* GraphQL */ `
 
   type Date_Range {
     start: Date!
-    end: Date!
+    end: Date
   }
 
   union Activity_Date = Date | Date_Range
