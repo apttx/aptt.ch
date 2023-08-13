@@ -8,7 +8,7 @@
 
   /** @type {Simulation_Node[]} */
   let nodes = [
-    { id: 'aptt', fx: 0, fy: 0 },
+    { id: 'aptt', icon: '/images/aptt.svg', fx: 0, fy: 0 },
     ...technologies.map((technology) => ({ ...technology, id: technology?.name })),
   ]
   /** @type {Simulation_Edge[]} */
