@@ -79,8 +79,6 @@ export const activities = (_, __, context) => {
       const activity_a_value = get_date_compare_value(activity_a.date)
       const activity_b_value = get_date_compare_value(activity_b.date)
 
-      console.debug(activity_a_value, activity_b_value)
-
       return activity_b_value - activity_a_value
     })
 
