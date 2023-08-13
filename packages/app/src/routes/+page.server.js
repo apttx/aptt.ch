@@ -30,6 +30,10 @@ const technology_fragment = gql`
 
 const projects_query = gql`
   {
+    technologies {
+      ...technology_fragment
+    }
+
     projects {
       title
       description
@@ -59,10 +63,6 @@ const projects_query = gql`
           }
         }
       }
-    }
-
-    technologies {
-      ...technology_fragment
     }
   }
   ${technology_fragment}
