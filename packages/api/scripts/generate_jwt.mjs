@@ -41,7 +41,9 @@ const main = () => {
 
   const jwt = sign({ secret }, user)
 
-  console.info(jwt)
+  console.info(
+    `${jwt}\n  ~~> http://localhost:5173/login?access_token=${jwt}\n  ~~> https://aptt.ch/login?access_token=${jwt}`,
+  )
 }
 
 main()
