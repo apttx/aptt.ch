@@ -46,15 +46,43 @@ export const technologies = (_, __, context) => {
   return technologies
 }
 
+/** @type {(date?: Date | Date_Range) => number} */
+const get_date_compare_value = (date) => {
+  if (!date) {
+    return 0
+  }
+
+  if ('start' in date) {
+    const value = date.end?.getTime() ?? Infinity
+
+    return value
+  }
+
+  if (date instanceof Date) {
+    return date.getTime()
+  }
+
+  return 0
+}
+
 /** @type {import('graphql').GraphQLFieldResolver<unknown, Resolver_Context>} */
 export const activities = (_, __, context) => {
-  const activities = context.activities.filter((project) => {
-    const meets_all_restrictions = project.restrictions.some((restriction) =>
-      meets_restriction(restriction, context.user),
-    )
+  const activities = context.activities
+    .filter((project) => {
+      const meets_all_restrictions = project.restrictions.some((restriction) =>
+        meets_restriction(restriction, context.user),
+      )
 
-    return meets_all_restrictions
-  })
+      return meets_all_restrictions
+    })
+    .sort((activity_a, activity_b) => {
+      const activity_a_value = get_date_compare_value(activity_a.date)
+      const activity_b_value = get_date_compare_value(activity_b.date)
+
+      console.debug(activity_a_value, activity_b_value)
+
+      return activity_b_value - activity_a_value
+    })
 
   return activities
 }
