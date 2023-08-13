@@ -68,8 +68,17 @@ const projects_query = gql`
   ${technology_fragment}
 `
 
-export const load = async () => {
-  const result = await client.query(projects_query, {})
+export const load = async (event) => {
+  const { cookies, fetch } = event
+
+  /** @type {Record<string, string>} */
+  let headers = {}
+  const access_token = cookies.get('access_token')
+  if (access_token) {
+    headers['Authorization'] = `Bearer ${access_token}`
+  }
+
+  const result = await client.query(projects_query, {}, { fetch, fetchOptions: { headers } })
 
   if (result.error) {
     throw error(500, result.error.message)
