@@ -3,11 +3,17 @@ import jsonwebtoken from 'jsonwebtoken'
 export const issuer = 'https://aptt.ch'
 export const audience = 'https://aptt.ch'
 
-/** @typedef {{ secret: string }} JwtOptions */
+/** @typedef {{ secret: string; expires_at?: Date }} JwtOptions */
 
 /** @type {(options: JwtOptions, user: User) => string} */
 export const sign = (options, user) => {
-  const jwt = jsonwebtoken.sign(user, options.secret, { audience, issuer })
+  /** @type {number | undefined} */
+  let expiresIn = undefined
+  if (options.expires_at) {
+    expiresIn = Math.floor((options.expires_at.getTime() - Date.now()) / 1000)
+  }
+
+  const jwt = jsonwebtoken.sign(user, options.secret, { audience, issuer, expiresIn })
 
   return jwt
 }
