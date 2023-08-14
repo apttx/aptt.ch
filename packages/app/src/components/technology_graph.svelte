@@ -21,7 +21,7 @@
   let visualize_by = 'enjoyment'
 
   /** @type {(edge: Simulation_Edge) => number} */
-  const dynamic_distanceee = (edge) => {
+  const dynamic_distance = (edge) => {
     // source is fixed center node, target is technology
     const target_node = edge.target
 
@@ -38,7 +38,7 @@
     const simulation = get_force_simulation({
       edges,
       nodes,
-      distance: dynamic_distanceee,
+      distance: dynamic_distance,
     })
 
     simulation.alphaTarget(0.5)
