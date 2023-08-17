@@ -12,4 +12,8 @@
     100%,
     50% - var(--width_layout) / 2
   );
+
+  --margin_content_text-nested: clamp(0px, 100%, 50% - var(--width_text) / 2);
+  --margin_content_page-nested: clamp(0px, 100%, 50% - var(--width_page) / 2);
+  --margin_content_layout-nested: clamp(0px, 100%, 50% - var(--width_layout) / 2);
 }
