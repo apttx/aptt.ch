@@ -1,0 +1,4 @@
+:root {
+  --easing_cubic_out: cubic-bezier(0, 0, 0.6, 1);
+  --easing_cubic_in: cubic-bezier(0, 0, 1, 0.3);
+}
