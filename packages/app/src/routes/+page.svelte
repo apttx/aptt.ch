@@ -46,14 +46,14 @@
         {/if}
       </time>
 
-      {#if activity.place.icon}
+      {#if activity.place?.icon}
         <img
           class="activity_place"
           src={activity.place.icon}
           alt="{activity.place.name} logo"
           title={activity.place.name}
         />
-      {:else}
+      {:else if activity.place}
         <span class="activity_place">{activity.place.name}</span>
       {/if}
 
@@ -107,6 +107,10 @@
     grid-area: place;
     width: auto;
     height: 3rem;
+  }
+
+  .activity_date {
+    grid-area: date;
   }
 
   .activity_events {
