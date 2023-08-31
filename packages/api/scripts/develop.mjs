@@ -7,6 +7,14 @@ import { get_handler, get_user_from_request } from '../source/handler.mjs'
 import { technologies } from '../data/technolgies.mjs'
 import { projects } from '../data/projects.mjs'
 import { activities } from '../data/activities.mjs'
+import { nanoid } from 'nanoid'
+
+/** @type {(url_unsafe_string: string) => string} */
+const get_slug = (url_unsafe_string) => {
+  const slug = url_unsafe_string.toLowerCase().replace(/\W+/g, '-')
+
+  return slug
+}
 
 const main = async () => {
   const environment = read_dotenv()
@@ -21,10 +29,43 @@ const main = async () => {
   const context = (initial_context) => {
     const user = get_user_from_request({ jwt_secret }, initial_context.request)
 
+    const content_projects = projects.map((project) => {
+      const id = nanoid()
+      const slug = get_slug(project.title)
+      const content_element_properties = {
+        id,
+        slug,
+      }
+
+      const result = {
+        ...project,
+        ...content_element_properties,
+      }
+
+      return result
+    })
+
+    const content_activities = activities.map((activity) => {
+      const id = nanoid()
+      const slug = get_slug(activity.title)
+      const content_element_properties = {
+        id,
+        slug,
+      }
+
+      const result = {
+        ...activity,
+        ...content_element_properties,
+      }
+
+      return result
+    })
+
+    /** @type {Resolver_Context} */
     const context = {
       technologies,
-      projects,
-      activities,
+      projects: content_projects,
+      activities: content_activities,
       user,
     }
 

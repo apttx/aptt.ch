@@ -19,7 +19,7 @@ assert(
  * ) => Resolver_Context}
  */
 export const context_from_env = () => {
-  /** @type {Restricted_Project[]} */
+  /** @type {(Project & Restricted_Element & Content_Element)[]} */
   let projects = []
   if (env.PRIVATE_PROJECTS) {
     projects = parse(env.PRIVATE_PROJECTS)
@@ -31,7 +31,7 @@ export const context_from_env = () => {
     technologies = parse(env.PRIVATE_TECHNOLOGIES)
   }
 
-  /** @type {Restricted_Activity[]} */
+  /** @type {(Activity & Restricted_Element & Content_Element)[]} */
   let activities = []
   if (env.PRIVATE_ACTIVITIES) {
     activities = parse(env.PRIVATE_ACTIVITIES)
