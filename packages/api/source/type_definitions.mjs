@@ -1,4 +1,9 @@
 export const typeDefs = /* GraphQL */ `
+  interface Content_Element {
+    id: String!
+    slug: String!
+  }
+
   type Technology {
     id: String!
     name: String!
@@ -23,13 +28,15 @@ export const typeDefs = /* GraphQL */ `
 
   union Project_Technology = Technology | Technology_Group | Technology_Connection
 
-  type Project {
-    id: String!
+  type Project implements Content_Element {
     title: String!
     description: String!
     thumbnail: Image!
     url: String
     technologies: [Project_Technology!]!
+    # content element
+    id: String!
+    slug: String!
   }
 
   type Place {
@@ -54,14 +61,16 @@ export const typeDefs = /* GraphQL */ `
     date: Date!
   }
 
-  type Activity {
-    id: String!
+  type Activity implements Content_Element {
     title: String!
     description: String!
     place: Place
     date: Activity_Date
     projects: [Project!]!
     events: [Activity_Event!]!
+    # content element
+    id: String!
+    slug: String!
   }
 
   type User {
