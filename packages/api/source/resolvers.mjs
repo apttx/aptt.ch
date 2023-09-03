@@ -1,14 +1,3 @@
-/** @type {(restriction: Restriction, user?: { roles: string[] }) => boolean} */
-const meets_restriction = (restriction, user) => {
-  if (!user) {
-    return false
-  }
-
-  const has_all_roles = restriction.roles.every((role) => user.roles.includes(role))
-
-  return has_all_roles
-}
-
 /**
  * @type {(
  *   technology: Technology | Technology_Group | Technology_Connection,
@@ -28,15 +17,7 @@ const resolve_technology_type = (technology) => {
 
 /** @type {import('graphql').GraphQLFieldResolver<unknown, Resolver_Context>} */
 export const projects = (_, __, context) => {
-  const projects = context.projects.filter((project) => {
-    const meets_all_restrictions = project.restrictions.some((restriction) =>
-      meets_restriction(restriction, context.user),
-    )
-
-    return meets_all_restrictions
-  })
-
-  return projects
+  return context.projects
 }
 
 /** @type {import('graphql').GraphQLFieldResolver<unknown, Resolver_Context>} */
@@ -67,20 +48,12 @@ const get_date_compare_value = (date) => {
 
 /** @type {import('graphql').GraphQLFieldResolver<unknown, Resolver_Context>} */
 export const activities = (_, __, context) => {
-  const activities = context.activities
-    .filter((project) => {
-      const meets_all_restrictions = project.restrictions.some((restriction) =>
-        meets_restriction(restriction, context.user),
-      )
+  const activities = context.activities.sort((activity_a, activity_b) => {
+    const activity_a_value = get_date_compare_value(activity_a.date)
+    const activity_b_value = get_date_compare_value(activity_b.date)
 
-      return meets_all_restrictions
-    })
-    .sort((activity_a, activity_b) => {
-      const activity_a_value = get_date_compare_value(activity_a.date)
-      const activity_b_value = get_date_compare_value(activity_b.date)
-
-      return activity_b_value - activity_a_value
-    })
+    return activity_b_value - activity_a_value
+  })
 
   return activities
 }

@@ -8,6 +8,7 @@ import { technologies } from '../data/technolgies.mjs'
 import { projects } from '../data/projects.mjs'
 import { activities } from '../data/activities.mjs'
 import { nanoid } from 'nanoid'
+import { get_resolver_context } from '../source/context.mjs'
 
 /** @type {(url_unsafe_string: string) => string} */
 const get_slug = (url_unsafe_string) => {
@@ -61,13 +62,12 @@ const main = async () => {
   const context = (initial_context) => {
     const user = get_user_from_request({ jwt_secret }, initial_context.request)
 
-    /** @type {Resolver_Context} */
-    const context = {
+    const context = get_resolver_context({
+      user,
       technologies,
       projects: content_projects,
       activities: content_activities,
-      user,
-    }
+    })
 
     return context
   }
