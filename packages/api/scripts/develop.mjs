@@ -25,41 +25,41 @@ const main = async () => {
     'missing `PRIVATE_JWT_SECRET` in environment.\n  ~~> $ echo PRIVATE_JWT_SECRET=replace_this >> .env',
   )
 
+  const content_projects = projects.map((project) => {
+    const id = nanoid()
+    const slug = get_slug(project.title)
+    const content_element_properties = {
+      id,
+      slug,
+    }
+
+    const result = {
+      ...project,
+      ...content_element_properties,
+    }
+
+    return result
+  })
+
+  const content_activities = activities.map((activity) => {
+    const id = nanoid()
+    const slug = get_slug(activity.title)
+    const content_element_properties = {
+      id,
+      slug,
+    }
+
+    const result = {
+      ...activity,
+      ...content_element_properties,
+    }
+
+    return result
+  })
+
   /** @type {(initial_context: import('graphql-yoga').YogaInitialContext) => Resolver_Context} */
   const context = (initial_context) => {
     const user = get_user_from_request({ jwt_secret }, initial_context.request)
-
-    const content_projects = projects.map((project) => {
-      const id = nanoid()
-      const slug = get_slug(project.title)
-      const content_element_properties = {
-        id,
-        slug,
-      }
-
-      const result = {
-        ...project,
-        ...content_element_properties,
-      }
-
-      return result
-    })
-
-    const content_activities = activities.map((activity) => {
-      const id = nanoid()
-      const slug = get_slug(activity.title)
-      const content_element_properties = {
-        id,
-        slug,
-      }
-
-      const result = {
-        ...activity,
-        ...content_element_properties,
-      }
-
-      return result
-    })
 
     /** @type {Resolver_Context} */
     const context = {
