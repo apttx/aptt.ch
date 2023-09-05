@@ -4,8 +4,6 @@
 
   import { carousel } from '$utilities/carousel.mjs'
 
-  import Browser_Window from '$components/browser_window.svelte'
-
   /** @type {(Pick<Project, 'title' | 'description' | 'url' | 'thumbnail'> & { slug: string })[]} */
   export let projects
 
@@ -60,16 +58,13 @@
           </a>
         </p>
 
-        <div
-          role="presentation"
-          class="project_browser_window"
+        <figure
+          class="project_thumbnail"
         >
-          <Browser_Window
-            title={project.title}
-            screenshot_url={project.thumbnail.url}
-            url={project.url}
-          />
-        </div>
+        <picture>
+          <img src="{project.thumbnail.url}" alt="Screenshot of {project.title}" />
+        </picture>
+        </figure>
       </li>
     {/each}
   </ul>
@@ -176,7 +171,14 @@
     text-underline-offset: 0.15em;
   }
 
-  .project_browser_window {
+  .project_thumbnail {
     margin-block: 2rem;
+  }
+  .project_thumbnail picture,
+  .project_thumbnail img {
+    width: 100%;
+  }
+  .project_thumbnail img {
+    box-shadow: 0 0.5rem 2rem #00000044;
   }
 </style>
