@@ -10,16 +10,9 @@
   })
 </script>
 
-<div role="presentation">
-  <div
-    role="presentation"
-    class="technology_graph"
-  >
-    <Technology_Graph technologies={data.technologies} />
-  </div>
+<div role="presentation" class="hero">
+  <h1>aptt</h1>
 </div>
-
-<h1>aptt</h1>
 
 <!-- projects -->
 <h2>Stuff I've worked on</h2>
@@ -79,9 +72,26 @@
 </ul>
 
 <style>
-  .technology_graph {
-    margin-inline: var(--margin_content_layout);
-    margin-block: 4rem;
+  .hero {
+    height: 100vh;
+    background-image: url('/images/banner.jpg');
+    background-size: cover;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    font-weight: 800;
+    font-size: clamp(3rem, 10vw, 6rem);
+    color: white;
+    text-shadow: 0 0 1rem #00000055;
+  }
+
+  h2 {
+    margin-inline: var(--margin_content_page);
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: #888888;
+    text-transform: lowercase;
+    margin-top: 4rem;
   }
 
   .project_carousel {
@@ -125,20 +135,5 @@
 
   .activity_events {
     margin-top: 2rem;
-  }
-
-  h1 {
-    margin-inline: var(--margin_content_text);
-    font-weight: 800;
-    font-size: 1.5rem;
-  }
-
-  h2 {
-    margin-inline: var(--margin_content_page);
-    font-weight: 800;
-    font-size: clamp(2rem, 5vw, 4rem);
-    color: #888888;
-    text-transform: lowercase;
-    margin-top: 4rem;
   }
 </style>
