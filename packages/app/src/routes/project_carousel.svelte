@@ -58,12 +58,13 @@
           </a>
         </p>
 
-        <figure
-          class="project_thumbnail"
-        >
-        <picture>
-          <img src="{project.thumbnail.url}" alt="Screenshot of {project.title}" />
-        </picture>
+        <figure class="project_thumbnail">
+          <picture>
+            <img
+              src={project.thumbnail.url}
+              alt="Screenshot of {project.title}"
+            />
+          </picture>
         </figure>
       </li>
     {/each}
@@ -90,17 +91,17 @@
     align-content: center;
     justify-content: center;
     z-index: 1;
+    transition-duration: 150ms;
+    transition-property: opacity;
+    transition-timing-function: var(--easing_cubic_in);
     padding: 1rem;
     width: 3.5rem;
     height: 3.5rem;
-    transition-property: opacity;
-    transition-duration: 150ms;
-    transition-timing-function: var(--easing_cubic_in);
   }
 
   .carousel_button:disabled {
-    transition-timing-function: var(--easing_cubic_out);
     opacity: 0.25;
+    transition-timing-function: var(--easing_cubic_out);
   }
 
   @media (pointer: coarse) {
