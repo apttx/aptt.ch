@@ -1,9 +1,11 @@
 <script>
-  import { onDestroy, onMount } from 'svelte'
+  import { onDestroy } from 'svelte'
 
   import { get_force_simulation } from '$utilities/simulation.mjs'
 
+  import Visit from '~icons/ph/arrow-square-out-bold'
   import Graph from '$components/graph.svelte'
+  import Page_Content from '$components/page_content.svelte'
 
   export let data
 
@@ -54,14 +56,32 @@
   style:--scroll={scroll}
 >
   <div
+    aria-hidden="true"
     role="presentation"
-    class="intro"
+    class="intro content_card"
   >
     <h1 class="title">
       {data.project.title}
     </h1>
 
+    <a
+      title="Visit this project"
+      href={data.project.url}
+      target="_blank"
+      rel="noreferrer nofollow"
+      class="link"
+    >
+      <Visit aria-label="Visit" />
+    </a>
+
     <p class="description">{data.project.description}</p>
+  </div>
+
+  <div
+    role="presentation"
+    class="page_content content_card"
+  >
+    <Page_Content content={data.project.content} />
   </div>
 
   {#if data.project.thumbnail}
@@ -84,14 +104,12 @@
 <style>
   .hero {
     display: grid;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: 100vh auto auto;
     grid-template-columns: 1fr;
-    width: 100vw;
-    height: 100vh;
   }
 
   .thumbnail {
-    grid-row: 1 / 2;
+    grid-row: 1 / 3;
     grid-column: 1;
     transform: translateY(calc(0.2px * var(--scroll)));
     z-index: 0;
@@ -102,27 +120,68 @@
     object-fit: cover;
   }
 
-  .intro {
+  .content_card {
     --padding_inline: 3rem;
 
-    grid-row: 1;
-    grid-column: 1;
-    align-self: end;
-    z-index: 1;
     margin-inline: calc(var(--margin_content_text) - var(--padding_inline));
-    box-shadow: 0 0.25rem 0.5rem #00000033;
     background-color: white;
     padding: 2.5rem var(--padding_inline);
   }
 
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'title link'
+      'description description';
+    grid-row: 1;
+    grid-column: 1;
+    align-items: center;
+    align-self: end;
+    z-index: 2;
+    box-shadow: 0 0 5rem #00000011, 0 -2rem 3rem 1rem #00000009;
+  }
+
   .title {
+    grid-area: title;
     font-weight: 800;
     font-size: 1.5rem;
   }
 
+  .link {
+    display: block;
+    grid-area: link;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .link :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
   .description {
+    grid-area: description;
     grid-row: 2;
     grid-column: 1;
+    z-index: 2;
     margin-top: 1rem;
+  }
+
+  .page_content {
+    grid-row: 3;
+    grid-column: 1;
+    z-index: 3;
+  }
+
+  .page_content :global(p) {
+    margin-top: 1rem;
+    line-height: 1.75;
+  }
+
+  .page_content :global(a) {
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.15em;
   }
 </style>

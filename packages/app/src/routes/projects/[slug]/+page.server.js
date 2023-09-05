@@ -29,6 +29,7 @@ const technology_fragment = gql`
  *           target: Technology_Fragment
  *         }
  *     )[]
+ *     content: Page_Content[]
  *   }
  * }>}
  */
@@ -63,6 +64,8 @@ const projects_query = gql`
           }
         }
       }
+
+      content
     }
   }
   ${technology_fragment}
