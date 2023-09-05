@@ -22,7 +22,7 @@
 <h1>aptt</h1>
 
 <!-- projects -->
-<h2>stuff i've worked on</h2>
+<h2>Stuff I've worked on</h2>
 
 <div
   role="presentation"
@@ -32,7 +32,8 @@
 </div>
 
 <!-- activities -->
-<h2>stuff i've done</h2>
+<h2>Stuff I've done</h2>
+
 <ul class="activities">
   {#each data.activities as activity}
     <li class="activity">
@@ -126,21 +127,18 @@
     margin-top: 2rem;
   }
 
-  h1,
-  h2 {
-    margin-inline: var(--margin_content_text);
-  }
-
-  h1,
-  h2 {
-    font-weight: 800;
-  }
-
   h1 {
+    margin-inline: var(--margin_content_text);
+    font-weight: 800;
     font-size: 1.5rem;
   }
 
   h2 {
-    font-size: 1.25rem;
+    margin-inline: var(--margin_content_page);
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: #888888;
+    text-transform: lowercase;
+    margin-top: 4rem;
   }
 </style>
