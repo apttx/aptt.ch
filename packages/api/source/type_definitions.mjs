@@ -77,7 +77,13 @@ export const typeDefs = /* GraphQL */ `
     roles: [String!]!
   }
 
+  input Project_Where {
+    slug: String
+    id: String
+  }
+
   type Query {
+    project(where: Project_Where): Project
     projects: [Project!]!
     technologies: [Technology!]!
     activities: [Activity!]!
