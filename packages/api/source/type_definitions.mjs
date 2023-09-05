@@ -26,9 +26,14 @@ export const typeDefs = /* GraphQL */ `
     url: String!
   }
 
+  scalar Page_Content
+  interface Page {
+    content: [Page_Content!]!
+  }
+
   union Project_Technology = Technology | Technology_Group | Technology_Connection
 
-  type Project implements Content_Element {
+  type Project implements Content_Element & Page {
     title: String!
     description: String!
     thumbnail: Image!
@@ -37,6 +42,8 @@ export const typeDefs = /* GraphQL */ `
     # content element
     id: String!
     slug: String!
+    # page
+    content: [Page_Content!]!
   }
 
   type Place {
