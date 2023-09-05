@@ -1,3 +1,5 @@
+import { createGraphQLError } from 'graphql-yoga'
+
 /**
  * @type {(
  *   technology: Technology | Technology_Group | Technology_Connection,
@@ -72,8 +74,55 @@ const resolve_activity_date_type = (activity_date) => {
   return 'Date_Range'
 }
 
+/**
+ * @type {<Property_Key extends string, Property_Type = any>(
+ *   property: Property_Key,
+ *   value: Property_Type,
+ * ) => <Type extends Record<Property_Key, Property_Type>>(object: Type) => boolean}
+ */
+const get_matches_property = (property, value) => (object) => object[property] === value
+
+/**
+ * @type {import('graphql').GraphQLFieldResolver<
+ *   unknown,
+ *   Resolver_Context,
+ *   { where: { slug?: string; id?: string } }
+ * >}
+ */
+const project = (_, params, context) => {
+  /** @type {((project: Record<string, any>) => boolean)[]} */
+  const matchers = []
+
+  if (params.where?.id) {
+    const matches_id = get_matches_property('id', params.where.id)
+
+    matchers.push(matches_id)
+  }
+
+  if (params.where?.slug) {
+    const matches_slug = get_matches_property('slug', params.where.slug)
+
+    matchers.push(matches_slug)
+  }
+
+  const project = context.projects.find((project) => {
+    const matches_everything = matchers.every((matches) => matches(project))
+
+    return matches_everything
+  })
+
+  if (!project) {
+    throw createGraphQLError(`there is no project matching the given parameters`, {
+      extensions: { code: 'not_found', params: params },
+    })
+  }
+
+  return project
+}
+
 export const resolvers = {
   Query: {
+    project,
     projects,
     technologies,
     activities,
