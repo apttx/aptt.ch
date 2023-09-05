@@ -173,7 +173,7 @@
   }
 
   .project_thumbnail {
-    margin-block: 2rem;
+    margin-block: 3rem;
   }
   .project_thumbnail picture,
   .project_thumbnail img {
