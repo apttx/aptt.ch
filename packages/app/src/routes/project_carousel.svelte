@@ -6,7 +6,7 @@
 
   import Browser_Window from '$components/browser_window.svelte'
 
-  /** @type {Pick<Project, 'title' | 'description' | 'url' | 'thumbnail'>[]} */
+  /** @type {(Pick<Project, 'title' | 'description' | 'url' | 'thumbnail'> & { slug: string })[]} */
   export let projects
 
   const { active_index, can_recede, recede, can_advance, advance, action } = carousel()
@@ -49,7 +49,16 @@
           {project.title}
         </span>
 
-        <p class="project_description">{project.description}</p>
+        <p class="project_description">
+          {project.description}
+
+          <a
+            href="/projects/{project.slug}"
+            class="project_detail_link"
+          >
+            Read more.
+          </a>
+        </p>
 
         <div
           role="presentation"
@@ -158,6 +167,13 @@
 
   .project_description {
     margin-inline: var(--margin_content_text-nested);
+  }
+
+  .project_detail_link {
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.15em;
   }
 
   .project_browser_window {

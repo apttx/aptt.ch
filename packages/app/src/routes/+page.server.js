@@ -17,19 +17,11 @@ const technology_fragment = gql`
  * @type {import('@urql/core').TypedDocumentNode<{
  *   technologies: Technology_Fragment[]
  *   projects: {
+ *     slug: string
  *     title: string
  *     description: string
  *     thumbnail: { url: string }
  *     url: string
- *     technologies: (
- *       | Technology_Fragment
- *       | { technologies: Technology_Fragment }
- *       | {
- *           connector?: Technology_Fragment
- *           source: Technology_Fragment
- *           target: Technology_Fragment
- *         }
- *     )[]
  *   }[]
  *   activities: {
  *     title: string
@@ -63,34 +55,13 @@ const projects_query = gql`
     }
 
     projects {
+      slug
       title
       description
       thumbnail {
         url
       }
       url
-      technologies {
-        __typename
-        ...technology_fragment
-
-        ... on Technology_Group {
-          technologies {
-            ...technology_fragment
-          }
-        }
-
-        ... on Technology_Connection {
-          connector {
-            ...technology_fragment
-          }
-          source {
-            ...technology_fragment
-          }
-          target {
-            ...technology_fragment
-          }
-        }
-      }
     }
 
     activities {
