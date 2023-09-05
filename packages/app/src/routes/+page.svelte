@@ -24,7 +24,12 @@
 <!-- projects -->
 <h2>stuff i've worked on</h2>
 
-<Project_Carousel projects={data.projects} />
+<div
+  role="presentation"
+  class="project_carousel"
+>
+  <Project_Carousel projects={data.projects} />
+</div>
 
 <!-- activities -->
 <h2>stuff i've done</h2>
@@ -76,6 +81,10 @@
   .technology_graph {
     margin-inline: var(--margin_content_layout);
     margin-block: 4rem;
+  }
+
+  .project_carousel {
+    margin-top: 2rem;
   }
 
   .activities {
