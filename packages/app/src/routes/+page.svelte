@@ -1,5 +1,4 @@
 <script>
-  import Technology_Graph from '$components/technology_graph.svelte'
   import Project_Carousel from './project_carousel.svelte'
 
   export let data
@@ -10,7 +9,10 @@
   })
 </script>
 
-<div role="presentation" class="hero">
+<div
+  role="presentation"
+  class="hero"
+>
   <h1>aptt</h1>
 </div>
 
@@ -73,25 +75,25 @@
 
 <style>
   .hero {
-    height: 100vh;
+    display: grid;
+    align-content: center;
+    justify-content: center;
     background-image: url('/images/banner.jpg');
     background-size: cover;
-    display: grid;
-    justify-content: center;
-    align-content: center;
+    height: 100vh;
+    color: white;
     font-weight: 800;
     font-size: clamp(3rem, 10vw, 6rem);
-    color: white;
     text-shadow: 0 0 1rem #00000055;
   }
 
   h2 {
     margin-inline: var(--margin_content_page);
+    margin-top: 4rem;
+    color: #888888;
     font-weight: 800;
     font-size: clamp(2rem, 5vw, 4rem);
-    color: #888888;
     text-transform: lowercase;
-    margin-top: 4rem;
   }
 
   .project_carousel {

@@ -151,7 +151,6 @@
   .project.inactive {
     transform: scale(0.85);
     opacity: 0.25;
-    transition-timing-function: var(--easing_cubic_in);
   }
 
   .project_title {
