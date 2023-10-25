@@ -1,0 +1,39 @@
+.colored_base {
+  --context_color_hint: var(--color-purple-3);
+  --context_color_interact: var(--color-purple-4);
+
+  background-color: white;
+  color: var(--color-neutral-5);
+}
+
+.colored_base_brand-1 {
+  --context_color_hint: var(--color-purple-1);
+  --context_color_interact: var(--color-purple-2);
+
+  background-color: white;
+  color: var(--color-purple-3);
+}
+
+.colored_brand-1 {
+  --context_color_hint: var(--color-purple-1);
+  --context_color_interact: var(--color-purple-2);
+
+  background-color: var(--color-purple-3);
+  color: white;
+}
+
+.colored_brand-2 {
+  --context_color_hint: var(--color-green-1);
+  --context_color_interact: var(--color-green-2);
+
+  background-color: var(--color-green-3);
+  color: white;
+}
+
+.colored_neutral-1 {
+  --context_color_hint: var(--color-purple-5);
+  --context_color_interact: var(--color-purple-4);
+
+  background-color: var(--color-neutral-5);
+  color: white;
+}

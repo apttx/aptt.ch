@@ -1,11 +1,16 @@
 <script>
   import { onDestroy } from 'svelte'
+  import { fly } from 'svelte/transition'
 
   import { get_force_simulation } from '$utilities/simulation.mjs'
 
   import Visit from '~icons/ph/arrow-square-out-bold'
   import Graph from '$components/graph.svelte'
   import Page_Content from '$components/page_content.svelte'
+  import Page from '$components/page.svelte'
+  import { receive, send } from '../../transition.mjs'
+  import { cubicIn, cubicOut } from 'svelte/easing'
+  import { duration } from '$transitions/page.mjs'
 
   export let data
 
@@ -50,56 +55,67 @@
 
 <svelte:window on:scroll={on_scroll} />
 
-<div
-  role="presentation"
-  class="hero"
-  style:--scroll={scroll}
->
-  <div
-    aria-hidden="true"
-    role="presentation"
-    class="intro content_card"
-  >
-    <h1 class="title">
-      {data.project.title}
-    </h1>
-
-    <a
-      title="Visit this project"
-      href={data.project.url}
-      target="_blank"
-      rel="noreferrer nofollow"
-      class="link"
-    >
-      <Visit aria-label="Visit" />
-    </a>
-
-    <p class="description">{data.project.description}</p>
-  </div>
-
-  <div
-    role="presentation"
-    class="page_content content_card"
-  >
-    <Page_Content content={data.project.content} />
-  </div>
-
-  {#if data.project.thumbnail}
-    <figure class="thumbnail">
-      <picture>
-        <img
-          src={data.project.thumbnail.url}
-          alt={data.project.title}
-        />
-      </picture>
-    </figure>
-  {/if}
-</div>
-
-<Graph
-  {nodes}
-  {edges}
+<img
+  in:receive={{ key: 'project_thumbnail' }}
+  out:send={{ key: 'project_thumbnail' }}
+  src="/images/banner.jpg"
+  alt=""
 />
+
+<Page>
+  <div
+    role="presentation"
+    class="hero"
+    style:--scroll={scroll}
+  >
+    <div
+      aria-hidden="true"
+      role="presentation"
+      class="intro content_card"
+      in:fly={{ y: 200, opacity: 0, duration: duration, easing: cubicOut }}
+      out:fly={{ y: 200, opacity: 0, duration: duration, easing: cubicIn }}
+    >
+      <h1 class="title">
+        {data.project.title}
+      </h1>
+
+      <a
+        title="Visit this project"
+        href={data.project.url}
+        target="_blank"
+        rel="noreferrer nofollow"
+        class="link"
+      >
+        <Visit aria-label="Visit" />
+      </a>
+
+      <p class="description">{data.project.description}</p>
+    </div>
+
+    <div
+      role="presentation"
+      class="page_content content_card"
+    >
+      <Page_Content content={data.project.content} />
+    </div>
+
+    {#if data.project.thumbnail}
+      <figure class="thumbnail">
+        <picture>
+          <img
+            src={data.project.thumbnail.url}
+            alt={data.project.title}
+          />
+        </picture>
+      </figure>
+    {/if}
+  </div>
+
+  <Graph
+    {nodes}
+    {edges}
+  />
+</Page>
 
 <style>
   .hero {
@@ -109,15 +125,20 @@
   }
 
   .thumbnail {
+    display: grid;
     grid-row: 1 / 3;
     grid-column: 1;
+    justify-content: center;
+    align-items: stretch;
     transform: translateY(calc(0.2px * var(--scroll)));
     z-index: 0;
+    overflow: hidden;
   }
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+  .thumbnail picture,
+  .thumbnail img {
+    justify-content: stretch;
+    max-width: unset;
   }
 
   .content_card {

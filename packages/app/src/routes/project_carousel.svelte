@@ -4,6 +4,8 @@
 
   import { carousel } from '$utilities/carousel.mjs'
 
+  import { receive, send } from './transition.mjs'
+
   /** @type {(Pick<Project, 'title' | 'description' | 'url' | 'thumbnail'> & { slug: string })[]} */
   export let projects
 
@@ -39,9 +41,11 @@
     style="position:relative"
   >
     {#each projects as project, project_index}
+      {@const active_project = project_index === $active_index}
+      {@const transition_key = active_project ? 'project_thumbnail' : project.title}
       <li
         class="project"
-        class:inactive={project_index !== $active_index}
+        class:inactive={!active_project}
       >
         <span class="project_title">
           {project.title}
@@ -58,14 +62,31 @@
           </a>
         </p>
 
-        <figure class="project_thumbnail">
-          <picture>
-            <img
-              src={project.thumbnail.url}
-              alt="Screenshot of {project.title}"
-            />
-          </picture>
-        </figure>
+        {#if active_project}
+          <figure class="project_thumbnail">
+            <picture
+              in:receive={{ key: 'project_thumbnail' }}
+              out:send={{ key: 'project_thumbnail' }}
+            >
+              <img
+                src={project.thumbnail.url}
+                alt="Screenshot of {project.title}"
+              />
+            </picture>
+          </figure>
+        {:else}
+          <figure class="project_thumbnail">
+            <picture
+              in:receive={{ key: 'project_thumbnail' }}
+              out:send={{ key: 'project_thumbnail' }}
+            >
+              <img
+                src={project.thumbnail.url}
+                alt="Screenshot of {project.title}"
+              />
+            </picture>
+          </figure>
+        {/if}
       </li>
     {/each}
   </ul>
@@ -173,12 +194,12 @@
 
   .project_thumbnail {
     margin-block: 3rem;
+    box-shadow: 0 0.5rem 2rem #00000044;
+    border-radius: 0.5rem;
+    overflow: hidden;
   }
   .project_thumbnail picture,
   .project_thumbnail img {
     width: 100%;
-  }
-  .project_thumbnail img {
-    box-shadow: 0 0.5rem 2rem #00000044;
   }
 </style>
